@@ -16,6 +16,8 @@ import {
   CardDescription,
   CardFooter,
 } from "@/shared/ui/card";
+import { FormBuilder } from "../form-builder";
+import { FieldValue } from "../form-builder/field/types";
 
 export function ProcessList() {
   const [forms, setForms] = useState([
@@ -75,6 +77,59 @@ export function ProcessList() {
             <CardHeader>
               <CardTitle>{form.name}</CardTitle>
               <CardDescription>Type: {form.type}</CardDescription>
+              <FormBuilder
+                onChange={(data) => console.log(data)}
+                defaultValue={{
+                  name: "John",
+                  name2: "Doe",
+                  query: [
+                    {
+                      key: "key1",
+                      value: "hello",
+                    },
+                    {
+                      key: "key2",
+                      value: "value2",
+                    },
+                  ],
+                }}
+                formConfig={{
+                  fields: [
+                    {
+                      name: "name",
+                      label: "User name",
+                      type: "text",
+                    },
+                    {
+                      name: "name2",
+                      label: "User name",
+                      hideIf: isFieldValue("name", "John"),
+                      type: "text",
+                    },
+                    {
+                      type: "array",
+                      name: "query",
+                      label: "Query params",
+                      newItemDefault: {
+                        key: "12",
+                        value: "valuee",
+                      },
+                      fields: [
+                        {
+                          type: "text",
+                          name: "key",
+                          label: "Key",
+                        },
+                        {
+                          type: "text",
+                          name: "value",
+                          label: "Value",
+                        },
+                      ],
+                    },
+                  ],
+                }}
+              />
             </CardHeader>
             <CardFooter className="flex justify-end">
               <Button
@@ -90,4 +145,10 @@ export function ProcessList() {
       </div>
     </div>
   );
+}
+
+function isFieldValue(fieldNamePath: string, value: FieldValue) {
+  return JSON.stringify({
+    "==": [{ var: [fieldNamePath] }, value],
+  });
 }

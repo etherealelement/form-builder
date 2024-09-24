@@ -1,12 +1,12 @@
-import { TextFieldConfig } from "./types";
+import { FieldProps } from "./types";
+import { ArrayField } from "./variants/array-field";
 import { TextField } from "./variants/text-field";
 
-const fieldMap: {
-  [key: string]: (field: TextFieldConfig) => JSX.Element;
-} = {
-  text: (field: TextFieldConfig) => <TextField config={field}></TextField>,
-};
-
-export const Field = ({ field }: { field: TextFieldConfig }) => {
-  return fieldMap[field.type](field);
-};
+export function Field({ config, ...base }: FieldProps) {
+  switch (config.type) {
+    case "text":
+      return <TextField {...base} config={config} />;
+    case "array":
+      return <ArrayField {...base} config={config} />;
+  }
+}

@@ -1,4 +1,4 @@
-// import { FormValue } from "../form/types";
+import { FormValue } from "../form/types";
 
 type FieldBase = {
   name: string;
@@ -24,18 +24,18 @@ export type ComboboxFieldConfig = FieldBase & {
   type: "combobox";
 };
 
-// export type ArrayFieldConfig = FieldBase & {
-//   type: "array";
-//   fields: FieldConfig[];
-//   newItemDefault?: FormValue;
-// };
+export type ArrayFieldConfig = FieldBase & {
+  type: "array";
+  fields: FieldConfig[];
+  newItemDefault?: FormValue;
+};
 
 export type FieldConfig =
   | TextFieldConfig
   | SelectFieldConfig
   | CheckboxFieldConfig
-  | ComboboxFieldConfig;
-// | ArrayFieldConfig;
+  | ComboboxFieldConfig
+  | ArrayFieldConfig;
 
 export type FieldValue = unknown;
 export type OnChangeFieldValue = (value: unknown) => void;

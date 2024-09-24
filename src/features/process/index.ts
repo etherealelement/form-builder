@@ -1,1 +1,1 @@
-export { ProcessList } from "./ui/process-list.tsx";
+export { ProcessList } from "./ui/process-list";

@@ -1,23 +1,35 @@
 import { Input } from "@/shared/ui/input";
+import { FieldProps, FieldValue, TextFieldConfig } from "../types";
+import { BaseLabel } from "../filed-base";
+import { useId } from "react";
 
-import {
-  FormItem,
-  FormLabel,
-  FormControl,
-  // FormDescription,
-  // FormMessage,
-} from "@/shared/ui/form";
-import { TextFieldConfig } from "../types";
+export function TextField({
+  config,
+  value,
+  onChange,
+}: FieldProps<TextFieldConfig>) {
+  const id = useId();
 
-export const TextField = ({ config }: { config: TextFieldConfig }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
+  };
+
   return (
-    <FormItem>
-      <FormLabel>{config.label}</FormLabel>
-      <FormControl>
-        <Input name={config.name}></Input>
-      </FormControl>
-      {/* <FormDescription></FormDescription>
-      <FormMessage></FormMessage> */}
-    </FormItem>
+    <>
+      <BaseLabel id={id}>{config.label}</BaseLabel>
+      <Input
+        id={id}
+        name={config.name}
+        value={parseValue(value)}
+        onChange={handleChange}
+      />
+    </>
   );
+}
+
+const parseValue = (value: FieldValue) => {
+  if (typeof value === "string") {
+    return value;
+  }
+  return "";
 };

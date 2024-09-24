@@ -1,9 +1,9 @@
 import { ProcessList } from "@/features/process";
 
-export default function App() {
+export function App() {
   return (
     <>
-      <ProcessList></ProcessList>
+      <ProcessList />
     </>
   );
 }
