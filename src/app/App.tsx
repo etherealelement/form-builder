@@ -1,9 +1,9 @@
-import { Button } from "@/shared/ui/button.tsx";
+import { ProcessList } from "@/features/process";
 
 export default function App() {
   return (
     <>
-      <Button>Button </Button>
+      <ProcessList></ProcessList>
     </>
   );
 }
